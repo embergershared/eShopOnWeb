@@ -98,19 +98,6 @@ You can also run the samples in Docker (see below).
     dotnet ef migrations add InitialIdentityModel --context appidentitydbcontext -p ../Infrastructure/Infrastructure.csproj -s Web.csproj -o Identity/Migrations
     ```
 
-## Running the sample using Docker
-
-You can run the Web sample by running these commands from the root folder (where the .sln file is located):
-
-```
-docker-compose build
-docker-compose up
-```
-
-You should be able to make requests to localhost:5106 for the Web project, and localhost:5200 for the Public API project once these commands complete. If you have any problems, especially with login, try from a new guest or incognito browser instance.
-
-You can also run the applications by using the instructions located in their `Dockerfile` file in the root of each project. Again, run these commands from the root of the solution (where the .sln file is located).
-
 ## Community Extensions
 
 We have some great contributions from the community, and while these aren't maintained by Microsoft we still want to highlight them.
