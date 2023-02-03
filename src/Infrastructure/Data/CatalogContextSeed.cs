@@ -84,6 +84,7 @@ public class CatalogContextSeed
     {
         return new List<CatalogItem>
             {
+                new(2,1, "Chevron Phillips Chemical", "CPChem", 15, "http://catalogbaseurltobereplaced/images/products/0.png"),
                 new(2,2, ".NET Bot Black Sweatshirt", ".NET Bot Black Sweatshirt", 19.5M,  "http://catalogbaseurltobereplaced/images/products/1.png"),
                 new(1,2, ".NET Black & White Mug", ".NET Black & White Mug", 8.50M, "http://catalogbaseurltobereplaced/images/products/2.png"),
                 new(2,5, "Prism White T-Shirt", "Prism White T-Shirt", 12,  "http://catalogbaseurltobereplaced/images/products/3.png"),
