@@ -3,7 +3,7 @@ terraform {
     organization = "embergerimmdays"
 
     workspaces {
-      name = "eShopOnWeb-05-AppServiceWeb"
+      name = "eShopOnWeb-04-AzureSQLDBs"
     }
   }
 }

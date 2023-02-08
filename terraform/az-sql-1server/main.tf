@@ -1,7 +1,6 @@
 # Overview:
 #   This module:
 #   - Creates an Azure SQL Server with Encryption and Security,
-#   - Creates 2 Azure SQL databases.
 
 
 #
