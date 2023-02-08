@@ -7,14 +7,20 @@
 #
 # - Dependencies data resources
 #
+locals {
+  rg_name = "rg-cpchem-${var.team_name}-${var.iterator}"
+  kv_name = "kv-cpchem-${var.team_name}-${var.iterator}"
+}
+
 data "azurerm_resource_group" "this" {
-  name = split("/", var.key_vault_id)[4]
+  name = local.rg_name
 }
 
 data "azurerm_key_vault" "this" {
-  name                = split("/", var.key_vault_id)[8]
-  resource_group_name = split("/", var.key_vault_id)[4]
+  name                = local.kv_name
+  resource_group_name = local.rg_name
 }
+
 
 # -
 # - Get the current user config

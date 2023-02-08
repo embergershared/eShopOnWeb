@@ -3,10 +3,8 @@
 # Processing naming pattern
 locals {
   rg_name = "rg-cpchem-${var.team_name}-${var.iterator}"
-
-  law_id = "/subscriptions/${var.spn_subscription_id}/resourceGroups/${local.rg_name}/providers/Microsoft.OperationalInsights/workspaces/law-cpchem-${var.team_name}-${var.iterator}"
-
-  st_id = "/subscriptions/${var.spn_subscription_id}/resourceGroups/${local.rg_name}/providers/Microsoft.Storage/storageAccounts/${replace("stcpchem${var.team_name}${var.iterator}", "-", "")}"
+  law_id  = "/subscriptions/${var.spn_subscription_id}/resourceGroups/${local.rg_name}/providers/Microsoft.OperationalInsights/workspaces/law-cpchem-${var.team_name}-${var.iterator}"
+  st_id   = "/subscriptions/${var.spn_subscription_id}/resourceGroups/${local.rg_name}/providers/Microsoft.Storage/storageAccounts/${replace("stcpchem${var.team_name}${var.iterator}", "-", "")}"
 }
 
 
