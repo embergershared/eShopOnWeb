@@ -1,30 +1,40 @@
 # Base resources for an Azure's Application Landing Zone
 
+# Processing naming pattern
+locals {
+  rg_name = "rg-cpchem-${var.team_name}-${var.iterator}"
+
+  law_id = "/subscriptions/${var.spn_subscription_id}/resourceGroups/${local.rg_name}/providers/Microsoft.OperationalInsights/workspaces/law-cpchem-${var.team_name}-${var.iterator}"
+
+  st_id = "/subscriptions/${var.spn_subscription_id}/resourceGroups/${local.rg_name}/providers/Microsoft.Storage/storageAccounts/${replace("stcpchem${var.team_name}${var.iterator}", "-", "")}"
+}
+
+
 #--------------------------------------------------------------
 #   Gathering data
 #--------------------------------------------------------------
 data "azurerm_resources" "nsg_resources" {
-  resource_group_name = var.rg_name
+  resource_group_name = local.rg_name
   type                = "Microsoft.Network/networkSecurityGroups"
 }
 data "azurerm_resources" "kv_resources" {
-  resource_group_name = var.rg_name
+  resource_group_name = local.rg_name
   type                = "Microsoft.KeyVault/vaults"
 }
 data "azurerm_resources" "st_resources" {
-  resource_group_name = var.rg_name
+  resource_group_name = local.rg_name
   type                =  "Microsoft.Storage/storageAccounts"
 }
 data "azurerm_resources" "law_resources" {
-  resource_group_name = var.rg_name
+  resource_group_name = local.rg_name
   type                = "Microsoft.OperationalInsights/workspaces"
 }
 data "azurerm_resources" "appi_resources" {
-  resource_group_name = var.rg_name
+  resource_group_name = local.rg_name
   type                = "Microsoft.Insights/components"
 }
 data "azurerm_resources" "vnet_resources" {
-  resource_group_name = var.rg_name
+  resource_group_name = local.rg_name
   type                = "Microsoft.Network/virtualNetworks"
 }
 
@@ -73,9 +83,10 @@ resource "azurerm_monitor_diagnostic_setting" "this" {
 
   name                            = "${each.key}-diag"
   target_resource_id              = each.value
-  log_analytics_workspace_id      = var.law_id
+
+  log_analytics_workspace_id      = local.law_id
   log_analytics_destination_type  = "AzureDiagnostics"
-  storage_account_id              = var.st_id
+  storage_account_id              = local.st_id
 
   dynamic "enabled_log" {
     for_each = lookup(data.azurerm_monitor_diagnostic_categories.this, each.key)["logs"]
