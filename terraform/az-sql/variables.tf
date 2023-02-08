@@ -4,12 +4,6 @@ variable spn_client_id       {}
 variable spn_secret          {}
 
 
-#   Dependencies
-# variable "key_vault_id" {
-#   type        = string
-#   description = "(Required) Specifies the existing Key Vault Id where you want to store AZ Sql Server Password and CMK Key."
-# }
-
 #   General settings
 variable "team_name" {}
 variable iterator {
