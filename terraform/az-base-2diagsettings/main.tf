@@ -83,7 +83,7 @@ resource "azurerm_monitor_diagnostic_setting" "this" {
   target_resource_id              = each.value
 
   log_analytics_workspace_id      = local.law_id
-  log_analytics_destination_type  = ""
+  log_analytics_destination_type  = "AzureDiagnostics"
   storage_account_id              = local.st_id
 
   dynamic "enabled_log" {
@@ -110,5 +110,9 @@ resource "azurerm_monitor_diagnostic_setting" "this" {
       }
     }
   }
+
+  ignore_changes = [
+    log_analytics_destination_type
+  ]
 }
 #*/
