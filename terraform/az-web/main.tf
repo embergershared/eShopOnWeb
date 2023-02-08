@@ -1,6 +1,15 @@
 #--------------------------------------------------------------
 #   Gathering data
 #--------------------------------------------------------------
+locals {
+  rg_name = "rg-cpchem-${var.team_name}-${var.iterator}"
+  kv_name = "kv-cpchem-${var.team_name}-${var.iterator}"
+  mssql_server_id = "/subscriptions/${var.spn_subscription_id}/resourceGroups/${local.rg_name}/providers/Microsoft.Sql/servers/sqlsvr-cpchem-${var.team_name}-${var.iterator}"
+  key_vault_id    = "/subscriptions/${var.spn_subscription_id}/resourceGroups/${local.rg_name}/providers/Microsoft.KeyVault/vaults/kv-cpchem-${var.team_name}-${var.iterator}"
+  application_insights_id = "/subscriptions/${var.spn_subscription_id}/resourceGroups/${local.rg_name}/providers/microsoft.insights/components/appi-cpchem-${var.team_name}-${var.iterator}"
+}
+
+
 data azurerm_resource_group this {
   name = var.rg_name
 }
