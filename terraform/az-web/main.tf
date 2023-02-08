@@ -3,7 +3,6 @@
 #--------------------------------------------------------------
 locals {
   rg_name = "rg-cpchem-${var.team_name}-${var.iterator}"
-  kv_name = "kv-cpchem-${var.team_name}-${var.iterator}"
   mssql_server_id = "/subscriptions/${var.spn_subscription_id}/resourceGroups/${local.rg_name}/providers/Microsoft.Sql/servers/sqlsvr-cpchem-${var.team_name}-${var.iterator}"
   key_vault_id    = "/subscriptions/${var.spn_subscription_id}/resourceGroups/${local.rg_name}/providers/Microsoft.KeyVault/vaults/kv-cpchem-${var.team_name}-${var.iterator}"
   application_insights_id = "/subscriptions/${var.spn_subscription_id}/resourceGroups/${local.rg_name}/providers/microsoft.insights/components/appi-cpchem-${var.team_name}-${var.iterator}"
@@ -11,23 +10,23 @@ locals {
 
 
 data azurerm_resource_group this {
-  name = var.rg_name
+  name = local.rg_name
 }
 data azurerm_mssql_database eshopweb_catalog {
   name      = lower("sqldb-cpchem-${var.team_name}-${var.iterator}-catalog")
-  server_id = var.mssql_server_id
+  server_id = local.mssql_server_id
 }
 data azurerm_mssql_database eshopweb_identity {
   name      = lower("sqldb-cpchem-${var.team_name}-${var.iterator}-identity")
-  server_id = var.mssql_server_id
+  server_id = local.mssql_server_id
 }
 data azurerm_key_vault_secret sql_admin_pwd {
-  name         = reverse(split("/", var.mssql_server_id))[0]
-  key_vault_id = var.key_vault_id
+  name         = reverse(split("/", local.mssql_server_id))[0]
+  key_vault_id = local.key_vault_id
 }
 data azurerm_application_insights this {
-  resource_group_name = split("/", var.application_insights_id)[4]
-  name                = split("/", var.application_insights_id)[8]
+  resource_group_name = split("/", local.application_insights_id)[4]
+  name                = split("/", local.application_insights_id)[8]
 }
 
 #--------------------------------------------------------------
