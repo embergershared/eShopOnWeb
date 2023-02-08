@@ -111,8 +111,10 @@ resource "azurerm_monitor_diagnostic_setting" "this" {
     }
   }
 
-  ignore_changes = [
-    log_analytics_destination_type
-  ]
+  lifecycle {
+    ignore_changes = [
+      log_analytics_destination_type,
+    ]
+  }
 }
 #*/
